@@ -22,8 +22,3 @@ instance Applicative Maybe where
 
 instance Monad Maybe where
   xs >>= f = maybe xs nothing f
-
-safeHead [] = nothing
-safeHead (x:xs) = just x
-
-main = print $ just "omobó" >>= safeHead

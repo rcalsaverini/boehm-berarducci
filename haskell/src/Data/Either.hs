@@ -1,16 +1,8 @@
 {-# LANGUAGE RankNTypes #-}
 
+module Data.Either where
+
 import Prelude hiding (Either, Left, Right, either)
-
-{-
-data Either a b = Left a | Right b
-
-either :: (Either a b) -> (a -> r) -> (b -> r) -> r
-either (Left a) f _ = f a
-either (Right b) _ f = f b
-
--}
-
 
 newtype Either a b = Either {either :: forall r . (a -> r) -> (b -> r) -> r}
 
@@ -29,5 +21,3 @@ instance Applicative (Either a) where
 
 instance Monad (Either a) where
     xs >>= f = either xs left (\x -> f x)
-
-main = print $ "omobóW"
