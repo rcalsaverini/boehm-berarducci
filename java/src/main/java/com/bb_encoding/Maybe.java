@@ -23,10 +23,6 @@ class Maybe<a> {
         return case_nothing;
     }
 
-    public String toString() {
-        return maybe("Nothing", x -> "Just " + x.toString());
-    }
-
     public <b> Maybe<b> map(Function<a, b> function) {
         return bind(x -> just(function.apply(x)));
     }
@@ -37,5 +33,9 @@ class Maybe<a> {
 
     public <b> Maybe<b> over(Maybe<Function<a, b>> maybe_function) {
         return maybe_function.bind(f -> map(f));   
+    }
+
+    public String toString() {
+        return maybe("Nothing", x -> "Just " + x.toString());
     }
 }
