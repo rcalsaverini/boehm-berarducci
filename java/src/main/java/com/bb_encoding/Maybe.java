@@ -1,10 +1,10 @@
-package com.maybe;
+package com.bb_encoding;
 import java.util.function.*;
 
 class Maybe<a> {
 
     private Maybe(){};
-    
+
     public static <a> Maybe<a> just(a x) {
         return new Maybe<a>() {
             public <r> r maybe(r case_nothing, Function<a, r> case_just) {

@@ -1,4 +1,4 @@
-package com.maybe;
+package com.bb_encoding;
 import java.util.function.*;
 
 class Main {
