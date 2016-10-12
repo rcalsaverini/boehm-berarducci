@@ -1,6 +1,6 @@
 {-# LANGUAGE RankNTypes #-}
 
-module Data.Either where
+module Data.BoehmBerarducci.Either where
 
 import Prelude hiding (Either, Left, Right, either)
 

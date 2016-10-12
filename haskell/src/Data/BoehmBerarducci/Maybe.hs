@@ -1,6 +1,6 @@
 {-# LANGUAGE RankNTypes #-}
 
-module Data.Maybe where
+module Data.BoehmBerarducci.Maybe where
 
 
 import Prelude hiding (Maybe, Just, Nothing, maybe)
