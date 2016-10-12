@@ -4,15 +4,7 @@ import java.util.function.*;
 class Maybe<a> {
 
     private Maybe(){};
-
-    // public static <a, r> Maybe<a> with(BiFunction<r, Function<a, r>, r> with_maybe) {
-    //     return new Maybe<a>() {
-    //         public <r> r maybe(r case_nothing, Function<a, r> case_just) {
-    //             return with_maybe(case_nothing, case_just);
-    //         }
-    //     };
-    // }
-
+    
     public static <a> Maybe<a> just(a x) {
         return new Maybe<a>() {
             public <r> r maybe(r case_nothing, Function<a, r> case_just) {
