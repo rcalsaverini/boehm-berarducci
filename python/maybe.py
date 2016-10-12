@@ -1,3 +1,6 @@
+from functools import wraps
+
+
 class Maybe(object):
 
     def __init__(self, maybe):
@@ -12,8 +15,32 @@ class Maybe(object):
     def __rshift__(self, function):
         return self(nothing, lambda x: function(x))
 
-    def map(self, function):
+    def __rmul__(self, either_fs):
+        return either_fs(nothing, lambda f: f & self)
+
+    def __rand__(self, function):
         return self >> (lambda x: just(function(x)))
 
+    def map(self, function):
+        return function & self
+
+
 nothing = Maybe(lambda n, j: n)
-just = lambda x: Maybe(lambda n, j: j(x))
+
+
+def just(x):
+    return Maybe(lambda n, j: j(x))
+
+
+def unthrow(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        try:
+            return just(function(*args, **kwargs))
+        except Exception as e:
+            return nothing
+
+
+@unthrow
+def head(list):
+    return list[0]

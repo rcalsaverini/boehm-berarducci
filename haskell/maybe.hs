@@ -2,6 +2,14 @@
 
 import Prelude hiding (Maybe, Just, Nothing, maybe)
 
+{- 
+data Maybe a = Nothing | Just a
+
+maybe :: Maybe a -> r -> (a -> r) -> r
+maybe Nothing x _ = x
+maybe (Just x) _ f = f x
+-}
+
 data Maybe a = Maybe {maybe :: forall r . r -> (a -> r) -> r}
 
 nothing = Maybe (\nothing' just' -> nothing')
