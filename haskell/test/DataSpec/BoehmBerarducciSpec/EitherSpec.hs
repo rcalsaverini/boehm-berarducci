@@ -37,3 +37,14 @@ spec = do
         it "when fmapped, it's contents are mapped" $ do
             property $ \ (x :: Int) (y :: Int) -> 
                 (fmap (const y) ((right x) :: (Either String Int))) `shouldBe` (right y)
+
+
+    describe "either" $ do
+
+        it "returns the left argument when applied on a left instance" $ do
+            property $ \ (x :: Int) -> 
+                either (left x) (const "Left") (const "Right") `shouldBe` "Left"
+
+        it "returns the right argument when applied on a right instance" $ do
+            property $ \ (x :: Int) -> 
+                either (right x) (const "Left") (const "Right") `shouldBe` "Right"
