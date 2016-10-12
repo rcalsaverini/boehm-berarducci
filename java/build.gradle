@@ -3,8 +3,8 @@ apply plugin: 'application'
 
 jar {
     manifest {
-        attributes 'Main-Class': 'com.bb_encoding.Main'
+        attributes 'Main-Class': 'com.boehm_berarducci.Main'
     }
 }
 
-mainClassName = "com.bb_encoding.Main"
+mainClassName = "com.boehm_berarducci.Main"

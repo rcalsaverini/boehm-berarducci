@@ -5,7 +5,9 @@ class Either<a, b> {
 
     private a left_value;
 
-    private Either(a left_value){this.left_value = left_value};
+    private Either(a left_value){
+        this.left_value = left_value;
+    }
 
     public <r> r either(Function<a, r> case_left, Function<b, r> case_right) {
         return case_left.apply(left_value);
@@ -24,7 +26,7 @@ class Either<a, b> {
     }
 
     public static <a, b> Either<a, b> pure(b right_value) {
-        return right(right_value)
+        return right(right_value);
     }
 
     public <c> Either<a, c> map(Function<b, c> function) {
