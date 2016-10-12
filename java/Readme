@@ -1,0 +1,10 @@
+Java version
+------------
+
+Build:
+    
+    gradle build
+
+Run Main:
+
+    gradle run
