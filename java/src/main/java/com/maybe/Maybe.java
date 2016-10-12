@@ -5,6 +5,14 @@ class Maybe<a> {
 
     private Maybe(){};
 
+    // public static <a, r> Maybe<a> with(BiFunction<r, Function<a, r>, r> with_maybe) {
+    //     return new Maybe<a>() {
+    //         public <r> r maybe(r case_nothing, Function<a, r> case_just) {
+    //             return with_maybe(case_nothing, case_just);
+    //         }
+    //     };
+    // }
+
     public static <a> Maybe<a> just(a x) {
         return new Maybe<a>() {
             public <r> r maybe(r case_nothing, Function<a, r> case_just) {
@@ -17,6 +25,8 @@ class Maybe<a> {
         return new Maybe<>();
     }
 
+
+
     public <r> r maybe(r case_nothing, Function<a, r> case_just) {
         return case_nothing;
     }
@@ -26,7 +36,7 @@ class Maybe<a> {
     }
 
     public <b> Maybe<b> map(Function<a, b> function) {
-        return maybe(nothing(), x -> just(function.apply(x)));
+        return bind(x -> just(function.apply(x)));
     }
 
     public <b> Maybe<b> bind(Function<a, Maybe<b>> function) {
