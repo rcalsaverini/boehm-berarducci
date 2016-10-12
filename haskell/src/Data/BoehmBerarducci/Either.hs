@@ -21,3 +21,11 @@ instance Applicative (Either a) where
 
 instance Monad (Either a) where
     xs >>= f = either xs left (\x -> f x)
+
+instance (Show a, Show b) => Show (Either a b) where
+    show xs = either xs (\u -> "Left " ++ show u) (\u -> "Right " ++ show u)
+
+instance (Eq a, Eq b) => Eq (Either a b) where
+    xs == ys = either xs isLeftEqual isRightEqual where
+        isLeftEqual x = either ys (\y -> x == y) (const False)
+        isRightEqual x = either ys (const False) (\y -> x == y)
