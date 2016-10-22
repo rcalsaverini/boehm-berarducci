@@ -1,6 +1,3 @@
-from functools import wraps
-
-
 class Maybe(object):
 
     def __init__(self, maybe):
@@ -24,23 +21,10 @@ class Maybe(object):
     def map(self, function):
         return function & self
 
+    def __eq__(self, other):
+        is_equal_nothing = other(True, lambda j: False)
+        is_equal_just = lambda j1: other(False, lambda j2: j1 == j2)
+        return self(is_equal_nothing, is_equal_just)
 
 nothing = Maybe(lambda n, j: n)
-
-
-def just(x):
-    return Maybe(lambda n, j: j(x))
-
-
-def unthrow(function):
-    @wraps(function)
-    def wrapped(*args, **kwargs):
-        try:
-            return just(function(*args, **kwargs))
-        except Exception as e:
-            return nothing
-
-
-@unthrow
-def head(list):
-    return list[0]
+just = lambda x: Maybe(lambda n, j: j(x))

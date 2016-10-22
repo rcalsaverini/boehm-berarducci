@@ -1,3 +1,1 @@
-import either
-import free
-import maybe
+from boehmberarducci.either import left, right

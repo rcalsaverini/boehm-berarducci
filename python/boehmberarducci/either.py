@@ -1,6 +1,3 @@
-from functools import wraps
-
-
 class Either(object):
 
     def __init__(self, either):
@@ -26,6 +23,11 @@ class Either(object):
     def map(self, function):
         return function & self
 
+    def __eq__(self, other):
+        is_eq_left = lambda l1: other(lambda l2: l1 == l2, lambda r2: False)
+        is_eq_right = lambda r1: other(lambda l2: False, lambda r2: r1 == r2)
+        return self(is_eq_left, is_eq_right)
+
 
 def left(x):
     return Either(lambda l, r: l(x))
@@ -33,22 +35,3 @@ def left(x):
 
 def right(x):
     return Either(lambda l, r: r(x))
-
-
-def is_right(x):
-    return x(lambda x: False, lambda x: True)
-
-
-def unthrow(function):
-    @wraps(function)
-    def wrapped(*args, **kwargs):
-        try:
-            return right(function(*args, **kwargs))
-        except Exception as e:
-            return left(e)
-    return wrapped
-
-
-@unthrow
-def head(list):
-    return list[0]
