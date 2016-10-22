@@ -14,8 +14,8 @@ class Either(object):
     def __rshift__(self, function):
         return self(left, function)
 
-    def __rmul__(self, either_fs):
-        return either_fs(left, lambda f: self.map(f))
+    def __mul__(self, eithers):
+        return self(left, lambda f: f & eithers)
 
     def __rand__(self, function):
         return self >> (lambda x: right(function(x)))

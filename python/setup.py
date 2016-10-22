@@ -2,9 +2,10 @@
 Boehm-Berarducci encoding for some types
 """
 
-from setuptools import setup, find_packages
 from codecs import open
 from os import path
+from setuptools import find_packages
+from setuptools import setup
 
 here = path.abspath(path.dirname(__file__))
 
@@ -31,8 +32,9 @@ setup(
     keywords='types boehm-berarducci encodings',
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     install_requires=[],
+    setup_requires=['pytest-runner'],
     extras_require={
         'dev': ['check-manifest'],
-        'test': ['coverage', 'pytest'],
+        'test': ['pytest'],
     },
 )

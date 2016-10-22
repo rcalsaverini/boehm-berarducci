@@ -12,8 +12,8 @@ class Maybe(object):
     def __rshift__(self, function):
         return self(nothing, lambda x: function(x))
 
-    def __rmul__(self, either_fs):
-        return either_fs(nothing, lambda f: f & self)
+    def __mul__(self, justs):
+        return self(nothing, lambda f: f & justs)
 
     def __rand__(self, function):
         return self >> (lambda x: just(function(x)))
