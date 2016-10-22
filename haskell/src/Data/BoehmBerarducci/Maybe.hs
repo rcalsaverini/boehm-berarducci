@@ -3,22 +3,22 @@
 module Data.BoehmBerarducci.Maybe where
 
 
-import Prelude hiding (Maybe, Just, Nothing, maybe)
+import           Prelude hiding (Just, Maybe, Nothing, maybe)
 
 data Maybe a = Maybe {maybe :: forall r . r -> (a -> r) -> r}
 
-nothing = Maybe (\nothing' just' -> nothing')
-just x  = Maybe (\nothing' just' -> just' x)
+nothing = Maybe const
+just x  = Maybe (const ($ x))
 
 instance (Show a) => (Show (Maybe a)) where
   show xs = maybe xs "Nothing" (\x -> "Just " ++ show x)
-  
+
 instance Functor Maybe where
-  fmap f xs = maybe xs nothing (\us -> just $ f us)
-  
+  fmap f xs = maybe xs nothing (just . f)
+
 instance Applicative Maybe where
   pure = just
-  fs <*> xs = maybe fs nothing (\f -> fmap f xs)
+  fs <*> xs = maybe fs nothing (`fmap` xs)
 
 instance Monad Maybe where
   xs >>= f = maybe xs nothing f
