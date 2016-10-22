@@ -1,6 +1,3 @@
-from functools import wraps
-
-
 class Free(object):
 
     def __init__(self, unfree):
@@ -24,21 +21,22 @@ class Free(object):
     def join(self):
         self >> (lambda x: x)
 
-    def iter(function):
+    def iter(self, function):
         return self(lambda x: x, function)
 
-    def interpret(function):
+    def interpret(self, function):
         return self(pure, lambda x: self.join(function(x)))
-
 
 
 def pure(x):
     return Free(lambda pureF, freeF: pureF(x))
 
+
 def free(fs):
     def unfree(pureF, freeF):
         freeF(fs.map(lambda f: f(pureF, freeF)))
     return Free(unfree)
+
 
 def liftF(fs):
     free(fs.map(pure))
