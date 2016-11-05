@@ -3,6 +3,14 @@ class Free(object):
     def __init__(self, unfree):
         self.unfree = unfree
 
+    def __eq__(self, other):
+        pass
+
+    def __repr__(self):
+        case_pure = lambda x: "Pure {}".format(repr(x))
+        case_free = lambda x: "Free [{}]".format(repr(x))
+        return self(case_pure, case_free)
+
     def __call__(self, pureF, freeF):
         return self.unfree(pureF, freeF)
 

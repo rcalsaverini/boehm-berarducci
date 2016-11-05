@@ -1,3 +1,7 @@
+from boehmberarducci.functional_base import compose
+from boehmberarducci.functional_base import const
+
+
 class Either(object):
 
     def __init__(self, either):
@@ -18,14 +22,14 @@ class Either(object):
         return self(left, lambda f: f & eithers)
 
     def __rand__(self, function):
-        return self >> (lambda x: right(function(x)))
+        return self >> compose(right, function)
 
     def map(self, function):
         return function & self
 
     def __eq__(self, other):
-        is_eq_left = lambda l1: other(lambda l2: l1 == l2, lambda r2: False)
-        is_eq_right = lambda r1: other(lambda l2: False, lambda r2: r1 == r2)
+        is_eq_left = lambda l1: other(lambda l2: l1 == l2, const(False))
+        is_eq_right = lambda r1: other(const(False), lambda r2: r1 == r2)
         return self(is_eq_left, is_eq_right)
 
 

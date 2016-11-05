@@ -1,3 +1,7 @@
+from boehmberarducci.functional_base import compose
+from boehmberarducci.functional_base import const
+
+
 class Maybe(object):
 
     def __init__(self, maybe):
@@ -10,19 +14,19 @@ class Maybe(object):
         return self("Nothing", lambda x: "Just {}".format(x))
 
     def __rshift__(self, function):
-        return self(nothing, lambda x: function(x))
+        return self(nothing, function)
 
     def __mul__(self, justs):
         return self(nothing, lambda f: f & justs)
 
     def __rand__(self, function):
-        return self >> (lambda x: just(function(x)))
+        return self >> compose(just, function)
 
     def map(self, function):
         return function & self
 
     def __eq__(self, other):
-        is_equal_nothing = other(True, lambda j: False)
+        is_equal_nothing = other(True, const(False))
         is_equal_just = lambda j1: other(False, lambda j2: j1 == j2)
         return self(is_equal_nothing, is_equal_just)
 
