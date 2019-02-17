@@ -3,7 +3,7 @@
 module Data.BoehmBerarducci.Maybe where
 
 
-import           Prelude hiding (Just, Maybe, Nothing, maybe)
+import Prelude hiding (Just, Maybe, Nothing, maybe)
 
 data Maybe a = Maybe {maybe :: forall r . r -> (a -> r) -> r}
 

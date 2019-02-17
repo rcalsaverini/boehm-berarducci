@@ -1,6 +1,7 @@
 
 # Created by https://www.gitignore.io/api/haskell,java,scala,python,gradle,leiningen
-
+.mypy_cache
+.vscode
 ### Haskell ###
 dist
 dist-*
@@ -187,3 +188,4 @@ gradle-app.setting
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
+haskell/src/Data/BoehmBerarducci/Pairs.hs
