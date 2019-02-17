@@ -23,3 +23,6 @@ tests:
     - -with-rtsopts=-N
     dependencies:
     - haskell
+    - QuickCheck
+    - hspec
+    - hspec-discover
