@@ -1,0 +1,12 @@
+{
+  "name": "boehm-berarducci",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/nix:1": {
+      "version": "latest",
+      "extraNixConfig": "experimental-features = nix-command flakes"
+    }
+  },
+  "postCreateCommand": "nix develop --command echo 'Dev shell ready'",
+  "remoteUser": "vscode"
+}

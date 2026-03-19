@@ -1,4 +1,4 @@
-package com.bb_encoding;
+package com.boehm_berarducci;
 import java.util.function.*;
 
 class Main {

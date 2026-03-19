@@ -22,8 +22,6 @@ func (maybe Maybe) String() string {
     return maybe.maybe("Nothing", func(x a) r {return fmt.Sprintf("Just %v", x)}).(string)
 }
 
-func (maybe Maybe) Map(func(a) b) 
-
 func main() {	
 	var x = just(1)
 	fmt.Println(x)
